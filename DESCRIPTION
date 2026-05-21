@@ -1,13 +1,18 @@
-Package: project
-Title: What the Package Does (One Line, Title Case)
+Package: pristineR
+Title: Tools for Creating Cleaner, Safer, and More Efficient Data Workflows in R.
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Laura", "Henze", , "laura.k.henze@lawrence.edu", role = c("aut", "cre"))
+Description: pristineR is an R package designed to simplify common 
+data-cleaning and summarization tasks through safer, user-friendly helper 
+functions. The package focuses on improving workflow efficiency by handling 
+repetitive preprocessing tasks such as date parsing, summary statistics generation, 
+and column name cleaning.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
 Imports: 
+    dplyr,
     lubridate
