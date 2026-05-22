@@ -3,3 +3,7 @@
 ^project\.Rcheck$
 ^project.*\.tar\.gz$
 ^project.*\.tgz$
+^pristineR\.Rcheck$
+^pristineR.*\.tar\.gz$
+^pristineR.*\.tgz$
+^LICENSE\.md$
