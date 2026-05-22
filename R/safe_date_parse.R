@@ -1,4 +1,22 @@
+#' Safely Parse Dates
+#'
+#' Converts mixed-format date vectors into standard Date objects.
+#' This function helps simplify parsing inconsistent date formats
+#' commonly found in messy datasets.
+#'
+#'
+#' @param x A character vector containing dates.
+#'
+#' @returns A Date vector.
+#' @export
+#'
+#' @examples
+#' safe_date_parse(c("2024-01-01", "01/02/2024"))
+#'
+#' @export
 safe_date_parse <- function(x) {
+
+  checkmate::assert_character(as.character(x))
 
   x <- as.character(x)
 
