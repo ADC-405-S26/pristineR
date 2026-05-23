@@ -1,0 +1,95 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# pristineR
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`pristineR` is an R package designed to simplify common
+data-cleaning and summarization tasks through safer,
+user-friendly helper functions.
+
+The package includes tools for:
+- parsing inconsistent date formats
+- generating summary statistics
+- cleaning messy column names
+
+## Installation
+
+You can install the development version of `pristineR`
+from GitHub with:
+
+```{r eval=FALSE}
+remotes::install_github("yourusername/pristineR")
+```
+
+## Load the Package
+
+```{r}
+library(pristineR)
+```
+
+## Example Dataset
+
+The package contains an example dataset called
+`messy_survey`.
+
+```{r}
+messy_survey
+```
+
+## Clean Column Names
+
+The `clean_names()` function converts messy
+column names into snake_case format.
+
+```{r}
+cleaned_data <- clean_names(messy_survey)
+
+names(cleaned_data)
+```
+
+## Parse Dates
+
+The `safe_date_parse()` function safely parses mixed-format
+dates into standard Date objects.
+
+```{r}
+cleaned_data$submission_date <-
+  safe_date_parse(cleaned_data$submission_date)
+
+cleaned_data
+```
+
+## Generate Summary Statistics
+
+The `quick_summary()` function generates common summary
+statistics for selected numeric columns.
+
+```{r}
+quick_summary(
+  cleaned_data,
+  c("exam_score")
+)
+```
+
+## Package Functions
+
+`pristineR` currently includes:
+
+- `safe_date_parse()`
+- `quick_summary()`
+- `clean_names()`
