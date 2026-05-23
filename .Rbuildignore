@@ -7,3 +7,5 @@
 ^pristineR.*\.tar\.gz$
 ^pristineR.*\.tgz$
 ^LICENSE\.md$
+^data-raw$
+^README\.Rmd$
