@@ -10,8 +10,8 @@
 `pristineR` is an R package designed to simplify common data-cleaning
 and summarization tasks through safer, user-friendly helper functions.
 
-The package includes tools for: - parsing inconsistent date formats -
-generating summary statistics - cleaning messy column names
+The package includes tools for parsing inconsistent date formats,
+generating summary statistics, and cleaning messy column names
 
 ## Installation
 
