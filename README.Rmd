@@ -26,11 +26,12 @@ The package includes tools for parsing inconsistent date formats, generating sum
 
 ## Installation
 
-You can install the development version of `pristineR`
-from GitHub with:
+You can install the development version of pristineR from
+[GitHub](https://github.com/) with:
 
-```{r}
-# install.packages("devtools")
+```{r eval = FALSE}
+#install.packages("remotes")
+#install.packages("devtools")
 devtools::install_github("ADC-405-S26/pristineR")
 ```
 
