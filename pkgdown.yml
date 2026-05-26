@@ -1,0 +1,9 @@
+pandoc: 3.8.3
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  pristineR-workflow: pristineR-workflow.html
+last_built: 2026-05-26T23:17Z
+urls:
+  reference: https://adc-405-s26.github.io/pristineR/reference
+  article: https://adc-405-s26.github.io/pristineR/articles
