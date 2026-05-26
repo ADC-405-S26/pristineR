@@ -1,0 +1,128 @@
+---
+title: "Cleaning Messy Data with pristineR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Cleaning Messy Data with pristineR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+Data cleaning is one of the most common and repetitive tasks
+in data analysis workflows. Real-world datasets often contain
+inconsistent date formats, messy column names, and missing values
+that require a lot of the same tedious cleaning before analysis can begin.
+
+The `pristineR` package provides functions that simplify
+common data-cleaning tasks through safer and more user-friendly
+workflows.
+
+This vignette demonstrates how to use:
+- `clean_names()`
+- `safe_date_parse()`
+- `quick_summary()`
+
+using the included `messy_survey` dataset.
+
+```{r setup}
+library(pristineR)
+```
+
+# Example Dataset
+
+The package includes an example dataset called
+`messy_survey`.
+
+```{r}
+messy_survey
+```
+
+The dataset intentionally contains:
+- inconsistent column names
+- mixed date formats
+- missing values
+
+# Cleaning Column Names
+
+Messy column names can make analysis more difficult.
+The `clean_names()` function converts names
+into standardized snake_case formatting.
+
+```{r}
+cleaned_data <- clean_names(messy_survey)
+
+names(cleaned_data)
+```
+
+# Parsing Dates
+
+Datasets often contain dates stored in multiple formats.
+The `safe_date_parse()` function safely converts these
+dates into standard Date objects.
+
+```{r}
+cleaned_data$submission_date <-
+  safe_date_parse(cleaned_data$submission_date)
+
+cleaned_data
+```
+
+# Generating Summary Statistics
+
+The `quick_summary()` function generates common
+summary statistics for numeric variables.
+
+```{r}
+quick_summary(
+  cleaned_data,
+  c("exam_score")
+)
+```
+
+The summary includes:
+- mean
+- standard deviation
+- minimum
+- maximum
+- missing value counts
+
+# Complete Workflow
+
+The following example demonstrates a complete
+cleaning workflow using `pristineR`.
+
+```{r}
+cleaned_data <- messy_survey |>
+  clean_names()
+
+cleaned_data$submission_date <-
+  safe_date_parse(cleaned_data$submission_date)
+
+summary_table <- quick_summary(
+  cleaned_data,
+  c("exam_score")
+)
+
+summary_table
+```
+
+# Conclusion
+
+The `pristineR` package simplifies several common
+data-cleaning tasks that frequently arise in R workflows.
+
+By combining:
+- standardized column naming
+- safe date parsing
+- quick summary statistics
+
+the package provides a lightweight toolkit for preparing
+messy datasets for analysis.

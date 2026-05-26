@@ -8,3 +8,6 @@ project*.tgz
 pristineR.Rcheck/
 pristineR*.tar.gz
 pristineR*.tgz
+inst/doc
+/doc/
+/Meta/
