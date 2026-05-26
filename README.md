@@ -11,7 +11,7 @@
 and summarization tasks through safer, user-friendly helper functions.
 
 The package includes tools for parsing inconsistent date formats,
-generating summary statistics, and cleaning messy column names
+generating summary statistics, and cleaning messy column names.
 
 ## Installation
 

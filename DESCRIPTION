@@ -22,3 +22,4 @@ Depends:
     R (>= 3.5)
 LazyData: true
 VignetteBuilder: knitr
+URL: https://adc-405-s26.github.io/pristineR/

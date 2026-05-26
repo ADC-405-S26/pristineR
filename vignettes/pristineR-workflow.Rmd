@@ -25,12 +25,7 @@ The `pristineR` package provides functions that simplify
 common data-cleaning tasks through safer and more user-friendly
 workflows.
 
-This vignette demonstrates how to use:
-- `clean_names()`
-- `safe_date_parse()`
-- `quick_summary()`
-
-using the included `messy_survey` dataset.
+This vignette demonstrates how to use: `clean_names()`, `safe_date_parse()`, and `quick_summary()` using the included `messy_survey` dataset.
 
 ```{r setup}
 library(pristineR)
@@ -45,10 +40,8 @@ The package includes an example dataset called
 messy_survey
 ```
 
-The dataset intentionally contains:
-- inconsistent column names
-- mixed date formats
-- missing values
+The dataset intentionally contains inconsistent column names, mixed date 
+formats, and missing values.
 
 # Cleaning Column Names
 
@@ -87,12 +80,8 @@ quick_summary(
 )
 ```
 
-The summary includes:
-- mean
-- standard deviation
-- minimum
-- maximum
-- missing value counts
+The summary includes: mean, standard deviation, minimum, maximum, and missing 
+value counts.
 
 # Complete Workflow
 
@@ -119,10 +108,5 @@ summary_table
 The `pristineR` package simplifies several common
 data-cleaning tasks that frequently arise in R workflows.
 
-By combining:
-- standardized column naming
-- safe date parsing
-- quick summary statistics
-
-the package provides a lightweight toolkit for preparing
+By combining standardized column naming, safe date parsing, and quick summary statistics, the package provides a lightweight toolkit for preparing
 messy datasets for analysis.
