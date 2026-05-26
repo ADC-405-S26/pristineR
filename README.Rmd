@@ -29,8 +29,9 @@ The package includes tools for parsing inconsistent date formats, generating sum
 You can install the development version of `pristineR`
 from GitHub with:
 
-```{r eval=FALSE}
-remotes::install_github("yourusername/pristineR")
+```{r}
+# install.packages("devtools")
+devtools::install_github("ADC-405-S26/pristineR")
 ```
 
 ## Load the Package
