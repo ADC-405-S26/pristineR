@@ -24,6 +24,12 @@ user-friendly helper functions.
 
 The package includes tools for parsing inconsistent date formats, generating summary statistics, and cleaning messy column names.
 
+## Why pristineR?
+
+Many real-world datasets contain inconsistent date formats, messy column names, and missing values that require repetitive cleaning before analysis can begin.
+
+`pristineR` was created to simplify these common preprocessing tasks through lightweight helper functions that are easy to use, well documented, and designed to fail safely when given invalid inputs.
+
 ## Installation
 
 You can install the development version of pristineR from
@@ -50,12 +56,20 @@ The package contains an example dataset called
 messy_survey
 ```
 
+The dataset intentionally contains inconsistent column names, mixed date formats, and missing values.
+
 ## Clean Column Names
+
+Datasets imported from spreadsheets or surveys often
+contain spaces, punctuation, or inconsistent capitalization
+in column names.
 
 The `clean_names()` function converts messy
 column names into snake_case format.
 
 ```{r}
+names(messy_survey)
+
 cleaned_data <- clean_names(messy_survey)
 
 names(cleaned_data)
@@ -63,14 +77,24 @@ names(cleaned_data)
 
 ## Parse Dates
 
-The `safe_date_parse()` function safely parses mixed-format
-dates into standard Date objects.
+Datasets frequently contain dates stored in multiple formats.
+The `safe_date_parse()` function safely converts these valuesinto standard Date objects.
 
 ```{r}
 cleaned_data$submission_date <-
   safe_date_parse(cleaned_data$submission_date)
 
 cleaned_data
+```
+
+## Handling Invalid Dates
+
+If a date cannot be parsed, `safe_date_parse()` returns
+`NA` and produces a warning message instead of stopping
+execution completely.
+
+```{r}
+safe_date_parse(c("2024-01-01", "bad-date"))
 ```
 
 ## Generate Summary Statistics
@@ -83,6 +107,41 @@ quick_summary(
   cleaned_data,
   c("exam_score")
 )
+```
+
+The summary includes mean, standard deviation, minimum, maximum, and missing value counts.
+
+
+## Function Parameters
+
+- `safe_date_parse(x)`
+  - `x`: a character vector containing date values
+
+- `quick_summary(data, columns)`
+  - `data`: a data frame
+  - `columns`: character vector of numeric columns
+    to summarize
+
+- `clean_names(data)`
+  - `data`: a data frame with column names to clean
+
+## Additional Example
+
+`pristineR` can also be used with other messy datasets.
+
+```{r}
+example_data <- data.frame(
+  "Customer Name" = c("Alice", "Bob"),
+  "Purchase.Date" = c("2024-01-01", "01/15/2024"),
+  "Total Sales $" = c(120, 95)
+)
+
+example_data <- clean_names(example_data)
+
+example_data$purchase_date <-
+  safe_date_parse(example_data$purchase_date)
+
+example_data
 ```
 
 ## Package Functions
