@@ -58,6 +58,12 @@
 <p><code>pristineR</code> is an R package designed to simplify common data-cleaning and summarization tasks through safer, user-friendly helper functions.</p>
 <p>The package includes tools for parsing inconsistent date formats, generating summary statistics, and cleaning messy column names.</p>
 <div class="section level2">
+<h2 id="why-pristiner">Why pristineR?<a class="anchor" aria-label="anchor" href="#why-pristiner"></a>
+</h2>
+<p>Many real-world datasets contain inconsistent date formats, messy column names, and missing values that require repetitive cleaning before analysis can begin.</p>
+<p><code>pristineR</code> was created to simplify these common preprocessing tasks through lightweight helper functions that are easy to use, well documented, and designed to fail safely when given invalid inputs.</p>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of pristineR from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
@@ -84,13 +90,18 @@
 <span><span class="co">#&gt; 3 Charles Swift          NA    March 5 2024</span></span>
 <span><span class="co">#&gt; 4    Daisy Slim          76      2024/04/10</span></span>
 <span><span class="co">#&gt; 5      Eve Trop          91      05-15-2024</span></span></code></pre></div>
+<p>The dataset intentionally contains inconsistent column names, mixed date formats, and missing values.</p>
 </div>
 <div class="section level2">
 <h2 id="clean-column-names">Clean Column Names<a class="anchor" aria-label="anchor" href="#clean-column-names"></a>
 </h2>
+<p>Datasets imported from spreadsheets or surveys often contain spaces, punctuation, or inconsistent capitalization in column names.</p>
 <p>The <code><a href="reference/clean_names.html">clean_names()</a></code> function converts messy column names into snake_case format.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cleaned_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="va">messy_survey</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">messy_survey</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Student.Name"    "Exam.Score."     "Submission.Date"</span></span>
+<span></span>
+<span><span class="va">cleaned_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="va">messy_survey</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cleaned_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "student_name"    "exam_score"      "submission_date"</span></span></code></pre></div>
@@ -98,7 +109,7 @@
 <div class="section level2">
 <h2 id="parse-dates">Parse Dates<a class="anchor" aria-label="anchor" href="#parse-dates"></a>
 </h2>
-<p>The <code><a href="reference/safe_date_parse.html">safe_date_parse()</a></code> function safely parses mixed-format dates into standard Date objects.</p>
+<p>Datasets frequently contain dates stored in multiple formats. The <code><a href="reference/safe_date_parse.html">safe_date_parse()</a></code> function safely converts these valuesinto standard Date objects.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cleaned_data</span><span class="op">$</span><span class="va">submission_date</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="reference/safe_date_parse.html">safe_date_parse</a></span><span class="op">(</span><span class="va">cleaned_data</span><span class="op">$</span><span class="va">submission_date</span><span class="op">)</span></span>
@@ -112,10 +123,20 @@
 <span><span class="co">#&gt; 5      Eve Trop         91      2024-05-15</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="handling-invalid-dates">Handling Invalid Dates<a class="anchor" aria-label="anchor" href="#handling-invalid-dates"></a>
+</h2>
+<p>If a date cannot be parsed, <code><a href="reference/safe_date_parse.html">safe_date_parse()</a></code> returns <code>NA</code> and produces a warning message instead of stopping execution completely.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/safe_date_parse.html">safe_date_parse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2024-01-01"</span>, <span class="st">"bad-date"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in safe_date_parse(c("2024-01-01", "bad-date")): 1 date(s) could not be</span></span>
+<span><span class="co">#&gt; parsed.</span></span>
+<span><span class="co">#&gt; [1] "2024-01-01" NA</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="generate-summary-statistics">Generate Summary Statistics<a class="anchor" aria-label="anchor" href="#generate-summary-statistics"></a>
 </h2>
 <p>The <code><a href="reference/quick_summary.html">quick_summary()</a></code> function generates common summary statistics for selected numeric columns.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/quick_summary.html">quick_summary</a></span><span class="op">(</span></span>
 <span>  <span class="va">cleaned_data</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"exam_score"</span><span class="op">)</span></span>
@@ -124,6 +145,57 @@
 <span><span class="co">#&gt;   variable    mean    sd   min   max missing_n</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;int&gt;</span></span>
 <span><span class="co">#&gt; 1 exam_score  87.5  8.19    76    95         1</span></span></code></pre></div>
+<p>The summary includes mean, standard deviation, minimum, maximum, and missing value counts.</p>
+</div>
+<div class="section level2">
+<h2 id="function-parameters">Function Parameters<a class="anchor" aria-label="anchor" href="#function-parameters"></a>
+</h2>
+<ul>
+<li>
+<code>safe_date_parse(x)</code>
+<ul>
+<li>
+<code>x</code>: a character vector containing date values</li>
+</ul>
+</li>
+<li>
+<code>quick_summary(data, columns)</code>
+<ul>
+<li>
+<code>data</code>: a data frame</li>
+<li>
+<code>columns</code>: character vector of numeric columns to summarize</li>
+</ul>
+</li>
+<li>
+<code>clean_names(data)</code>
+<ul>
+<li>
+<code>data</code>: a data frame with column names to clean</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="additional-example">Additional Example<a class="anchor" aria-label="anchor" href="#additional-example"></a>
+</h2>
+<p><code>pristineR</code> can also be used with other messy datasets.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Customer Name"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span><span class="op">)</span>,</span>
+<span>  <span class="st">"Purchase.Date"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2024-01-01"</span>, <span class="st">"01/15/2024"</span><span class="op">)</span>,</span>
+<span>  <span class="st">"Total Sales $"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">120</span>, <span class="fl">95</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">example_data</span><span class="op">$</span><span class="va">purchase_date</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="reference/safe_date_parse.html">safe_date_parse</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">$</span><span class="va">purchase_date</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">example_data</span></span>
+<span><span class="co">#&gt;   customer_name purchase_date total_sales</span></span>
+<span><span class="co">#&gt; 1         Alice    2024-01-01         120</span></span>
+<span><span class="co">#&gt; 2           Bob    2024-01-15          95</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="package-functions">Package Functions<a class="anchor" aria-label="anchor" href="#package-functions"></a>
