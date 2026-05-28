@@ -77,7 +77,7 @@ names(cleaned_data)
 
 Datasets frequently contain dates stored in multiple formats. The
 [`safe_date_parse()`](https://adc-405-s26.github.io/pristineR/reference/safe_date_parse.md)
-function safely converts these valuesinto standard Date objects.
+function safely converts these values into standard Date objects.
 
 ``` r
 

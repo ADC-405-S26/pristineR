@@ -17,6 +17,8 @@ and
 [`quick_summary()`](https://adc-405-s26.github.io/pristineR/reference/quick_summary.md)
 using the included `messy_survey` dataset.
 
+## Load the Package
+
 ``` r
 
 library(pristineR)
@@ -95,7 +97,7 @@ quick_summary(
 The summary includes: mean, standard deviation, minimum, maximum, and
 missing value counts.
 
-## Complete Workflow
+## Complete Workflow - Putting it all Together
 
 The following example demonstrates a complete cleaning workflow using
 `pristineR`.
@@ -125,6 +127,7 @@ summary_table
 The `pristineR` package simplifies several common data-cleaning tasks
 that frequently arise in R workflows.
 
-By combining standardized column naming, safe date parsing, and quick
-summary statistics, the package provides a lightweight toolkit for
-preparing messy datasets for analysis.
+Raw datasets are often difficult to analyze immediately due to
+inconsistent formatting and missing values. By combining the functions
+in `pristineR`, users can quickly transform messy data into a cleaner
+and more analysis-ready format.
