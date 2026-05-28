@@ -78,7 +78,7 @@ names(cleaned_data)
 ## Parse Dates
 
 Datasets frequently contain dates stored in multiple formats. The
-`safe_date_parse()` function safely converts these valuesinto standard
+`safe_date_parse()` function safely converts these values into standard
 Date objects.
 
 ``` r

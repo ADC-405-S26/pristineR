@@ -18,14 +18,15 @@ knitr::opts_chunk$set(
 
 Data cleaning is one of the most common and repetitive tasks
 in data analysis workflows. Real-world datasets often contain
-inconsistent date formats, messy column names, and missing values
-that require a lot of the same tedious cleaning before analysis can begin.
+inconsistent date formats, messy column names, and missing values that require a lot of the same tedious cleaning before analysis can begin.
 
 The `pristineR` package provides functions that simplify
 common data-cleaning tasks through safer and more user-friendly
 workflows.
 
 This vignette demonstrates how to use: `clean_names()`, `safe_date_parse()`, and `quick_summary()` using the included `messy_survey` dataset.
+
+# Load the Package
 
 ```{r setup}
 library(pristineR)
@@ -40,8 +41,7 @@ The package includes an example dataset called
 messy_survey
 ```
 
-The dataset intentionally contains inconsistent column names, mixed date 
-formats, and missing values.
+The dataset intentionally contains inconsistent column names, mixed date formats, and missing values.
 
 # Cleaning Column Names
 
@@ -83,7 +83,7 @@ quick_summary(
 The summary includes: mean, standard deviation, minimum, maximum, and missing 
 value counts.
 
-# Complete Workflow
+# Complete Workflow - Putting it all Together
 
 The following example demonstrates a complete
 cleaning workflow using `pristineR`.
@@ -108,5 +108,7 @@ summary_table
 The `pristineR` package simplifies several common
 data-cleaning tasks that frequently arise in R workflows.
 
-By combining standardized column naming, safe date parsing, and quick summary statistics, the package provides a lightweight toolkit for preparing
-messy datasets for analysis.
+Raw datasets are often difficult to analyze immediately due
+to inconsistent formatting and missing values. By combining
+the functions in `pristineR`, users can quickly transform
+messy data into a cleaner and more analysis-ready format.
